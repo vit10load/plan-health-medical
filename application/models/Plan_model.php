@@ -72,9 +72,9 @@ class Plan_model extends CI_model {
 
   }
 
-  public function exclude_plan($id){
+  public function exclude_plan_by_id($id){
 
-    $this->db->delete('plano_saude', array('id_plano' => $id));
+    return $this->db->delete('plano_saude', array('id_plano' => $id));
 
   }
 

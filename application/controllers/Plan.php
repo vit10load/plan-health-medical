@@ -5,6 +5,8 @@ class Plan extends CI_Controller {
 
 	private $data = null;
 
+	//TODO: Falta fazer esquema de rotas para usuários autorizados
+
 	
 	public function __construct(){
 
@@ -25,7 +27,7 @@ class Plan extends CI_Controller {
 
 	public function create() {
 
-		$data['plans'] = null;
+		//$data['plans'] = null;
 
 		$plan = array(
 			'acomodacao'=>$this->input->post('accomodation'),
@@ -33,16 +35,40 @@ class Plan extends CI_Controller {
 			'reembolso'=>$this->input->post('refund'),
 			'rede_medica'=>$this->input->post('medical_network')
 		);
-		
-		if ($this->plan_model->create_plan($plan)==true) {
 
-			$this->session->set_flashdata('succes_msg','Registered Plan Health!');
+		if ($this->input->post('operation') != "update") {
+
+			if ($this->plan_model->create_plan($plan)==true) {
+
+				$this->session->set_flashdata('succes_msg','Registered Plan Health!');
+
+			}else {
+
+				$this->session->set_flashdata('error_msg','Fail Register!');
+
+			}
 
 		}else {
 
-			$this->session->set_flashdata('error_msg','Fail Register!');
+			$id_plan = $this->input->post('id_plan');
+
+			$plan = array(
+				'acomodacao'=>$this->input->post('accomodation'),
+				'segmentacao'=>$this->input->post('segmentation'),
+				'reembolso'=>$this->input->post('refund'),
+				'rede_medica'=>$this->input->post('medical_network')
+			);
+
+			if ($this->plan_model->update_plan_by_id($plan,$id_plan)) {
+				
+				redirect('plan');
+
+				return;
+			}
+
 
 		}
+		
 
 		redirect('plan');
 
@@ -67,7 +93,17 @@ class Plan extends CI_Controller {
 
 	}
 
-	//TODO: exclude plan health by id
+	public function delete(){
+
+		$id_plan = $this->input->post('id_plan');
+
+		if ($this->plan_model->exclude_plan_by_id($id_plan)) {
+			
+			redirect('plan');
+		}
+
+	}
+
 
 
 }

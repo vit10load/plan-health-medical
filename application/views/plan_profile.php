@@ -70,7 +70,7 @@ if (!($this->session->has_userdata('user_id') and $this->session->has_userdata('
         <div class="form-group">
        
           <input type="hidden" name="operation" value="update" /> 
-          <input type="hidden" name="acomodacao"  value="" />
+          <input type="hidden" name="id_plan"  value="<?php echo $key->id_plano; ?>" />
           <input class="form-control" placeholder="Please enter Accommodation" name="accomodation" type="text" autofocus value="<?php echo $key->acomodacao; ?>">
         </div>
 
@@ -169,7 +169,7 @@ if (!($this->session->has_userdata('user_id') and $this->session->has_userdata('
           </tr>
           <tr> 
             <td style="padding-top: 20px;">
-              <form action="<?php  ?>" method="POST">
+              <form action="<?php echo base_url('plan/delete'); ?>" method="POST">
                 <input type="hidden" name="id_plan" value="<?php echo $key['id_plano']; ?>"/>
                 <button type="submit">excluir</button>
               </form>
