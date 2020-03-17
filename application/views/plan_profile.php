@@ -1,6 +1,7 @@
 <?php 
 
-if (!($this->session->has_userdata('user_id') and $this->session->has_userdata('user_type'))) {
+if (!($this->session->has_userdata('user_id') and $this->session->has_userdata('user_type')) and !($this->session->userdata('user_type') == 'medico' 
+or $this->session->userdata('user_type') == 'master')) {
 
   redirect('user/login_view');
 
@@ -49,11 +50,18 @@ if (!($this->session->has_userdata('user_id') and $this->session->has_userdata('
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Plan Health</a>
-
+            <a class="dropdown-item" href="<?php echo base_url('query'); ?>">Medical consultation</a>
           </div>
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
+        <?php if ($this->session->has_userdata('user_email')) {
+
+         ?>
+        <a class="btn btn-default" href="">User: <?php echo $this->session->userdata('user_email'); ?></a>
+        <?php }else { ?>
+        <a class="btn btn-default" href="#"></a>
+        <?php } ?>
         <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url('user/user_logout');?>">Logout</a>
       </div>
     </div>

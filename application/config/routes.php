@@ -55,4 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['plan'] = 'plan/index';
 $route['plan/create'] = 'plan/create';
-//TOODO: route plan/update = plan/update
+$route['query'] = 'query/index';
+$route['query/update'] = 'query/update';
+

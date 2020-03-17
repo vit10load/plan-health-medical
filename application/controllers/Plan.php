@@ -4,9 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Plan extends CI_Controller {
 
 	private $data = null;
-
-	//TODO: Falta fazer esquema de rotas para usuários autorizados
-
 	
 	public function __construct(){
 

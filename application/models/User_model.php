@@ -1,4 +1,3 @@
-
 <?php 
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -44,6 +43,7 @@ class User_model extends CI_model {
     $this->db->select('*');
     $this->db->from('user');
     $this->db->where('user_email',$email);
+
     $query=$this->db->get();
 
     if($query->num_rows() > 0){
@@ -58,8 +58,29 @@ class User_model extends CI_model {
 
   }
 
+  public function return_all_user_by_type_pacient($type="paciente"){
+
+    $this->db->select('*');
+    $this->db->from('user');
+    $this->db->where('user_type',$type);
+
+    $query=$this->db->get();
+
+    if ($query->num_rows() > 0) {
+
+      return $query->result();
+
+    }else {
+
+      return false;
+      
+    }
+
+
+  }
+
   /***
-    Pesquisando nome de usuario pelo nome
+    Search user by name
   ***/
 
     public function return_user_by_name($name){
@@ -95,4 +116,3 @@ class User_model extends CI_model {
 
 
   }
-
