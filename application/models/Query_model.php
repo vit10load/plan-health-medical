@@ -12,6 +12,10 @@ class Query_model extends CI_model {
 
   }
 
+  /**
+   *CREATE TRIGGER salary_medical AFTER INSERT ON consulta FOR EACH ROW BEGIN UPDATE user SET user.value = (OLD.user.value + NEW.consulta.value) WHERE user.user_id = NEW.fk_user_id AND user.user_type = 'medico'; END 
+   * */
+
   public function create_query($data){
 
     return $this->db->insert('consulta', $data);

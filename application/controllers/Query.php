@@ -28,22 +28,22 @@ class Query extends CI_Controller {
 
         $description = $this->input->post('description');
         $date_query = $this->input->post('date_query');
-        $user_id = $this->input->post('user_id');
+        $user_id = $this->input->post('user_id_medical');
+        $value = $this->input->post('value');
 
 
         $data = array(
             'description' => $description,
             'query_date' =>  $date_query,
+            'value' =>       $value,
             'fk_user_id' =>  $user_id
         );
 
         if (!($this->input->post('operation') === 'update')) {
 
             if ($this->query_model->create_query($data)) {
-            
-                $message['sucess'] = "Registered with sucess!";
     
-                $this->load->view('query_index',$message);
+                $this->index();
     
             }
         }else {
@@ -52,7 +52,7 @@ class Query extends CI_Controller {
 
             if($this->query_model->update_query_by_id($data,$id_query)) {
 
-                redirect('query');
+                $this->index();
 
                 return;
             }

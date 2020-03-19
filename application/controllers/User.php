@@ -54,6 +54,7 @@ class User extends CI_Controller {
 	}
 
 	function login_user(){ 
+		
 		$user_login=array(
 
 			'user_email'=>$this->input->post('user_email'),
@@ -139,6 +140,6 @@ class User extends CI_Controller {
 
 		$this->user_model->update_user_by_id($data,$user_id);
 
-		redirect('user/login_user');
+		redirect('user/list_user');
 	}
 }

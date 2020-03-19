@@ -1,11 +1,40 @@
 <?php 
 
-if (!($this->session->has_userdata('user_id') and $this->session->has_userdata('user_type')) and !($this->session->userdata('user_type') == 'medico' 
-or $this->session->userdata('user_type') == 'master')) {
+if (!($this->session->has_userdata('user_id') and $this->session->has_userdata('user_type'))) {
 
-  redirect('user/login_view');
+    redirect('user/user_logout');
+
+}elseif ($this->session->userdata('user_type') === 'paciente') {
+    
+    redirect('user/user_logout');
 
 }
+
+/*****
+ * 
+ * TODO: FAZER QUERY PARA DELETAR RENDA DO MEDICO COM CONSULTA MARCADA E PRA PLANO DE SAUDE
+ * 
+ * DELIMITER $
+
+CREATE TRIGGER salary_medical 
+BEFORE INSERT ON consulta 
+FOR EACH ROW 
+BEGIN 
+
+UPDATE user SET user.value = (user.value + NEW.consulta.value) WHERE user.user_id = NEW.fk_user_id_medical AND  user.user_type = 'medico';
+
+END$ 
+
+DELIMITER ;
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
 
 ?>
 
@@ -35,7 +64,7 @@ body {
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">User</a>
+        <a class="navbar-brand" href="<?php echo base_url('user/list_user'); ?>">User</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -44,7 +73,7 @@ body {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -59,7 +88,7 @@ body {
             </ul>
             <div class="form-inline my-2 my-lg-0">
                 <?php if ($this->session->has_userdata('user_email')) { ?>
-                <a class="btn btn-default" href="">User: <?php echo $this->session->userdata('user_email'); ?></a>
+                <a class="btn btn-default" href="<?php echo base_url('user/list_user'); ?>">User: <?php echo $this->session->userdata('user_email'); ?></a>
                 <?php }else { ?>
                 <a class="btn btn-default" href="#"></a>
                 <?php } ?>
@@ -71,6 +100,7 @@ body {
 
     <div class="col-md-12">
         <?php if (isset($all_query_id)) {
+
             
             foreach ($all_query_id as $key) {
           
@@ -78,6 +108,7 @@ body {
         <form role="form" method="post" action="<?php echo base_url('query/create'); ?>">
             <fieldset>
                 <div class="form-group">
+                    <input type="hidden" name="user_id_medical" value="<?php echo $this->session->userdata('user_id'); ?>" />
                     <input type="hidden" name="operation" value="<?php echo $action; ?>" />
                     <input type="hidden" name="id_query" value="<?php echo $key->id_consulta; ?>" />
                     <textarea rows="8" class="form-control" placeholder="Please enter description the query"
@@ -97,15 +128,19 @@ body {
                         <?php 
                         if (!empty($user_for_query)) {
 
-                            foreach ($user_for_query as $key) {
+                            foreach ($user_for_query as $keys) {
 
                          ?>
-                        <option value="<?php echo $key->user_id; ?>"><?php echo $key->user_name; ?></option>
+                        <option value="<?php echo $keys->user_id; ?>"><?php echo $keys->user_name; ?></option>
                         <?php 
                             }
 
                         } ?>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control" type="number" placeholder="press value the query" name="value" value="<?php echo $key->value; ?>" />
                 </div>
 
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Update Query" name="register" />
@@ -126,7 +161,7 @@ body {
                 <div class="form-group">
 
                     <input type="hidden" name="operation" value="save" />
-                    <input type="hidden" name="id_consulta" value="" />
+                    <input type="hidden" name="user_id_medical" value="<?php echo $this->session->userdata('user_id'); ?>" />
                     <textarea rows="8" class="form-control" placeholder="Please enter description the query"
                         name="description" type="text" autofocus value="">
                    </textarea>
@@ -152,6 +187,10 @@ body {
 
                         } ?>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control" type="number" placeholder="press value the query" name="value" />
                 </div>
 
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Create Query" name="register" />

@@ -58,11 +58,12 @@ class User_model extends CI_model {
 
   }
 
-  public function return_all_user_by_type_pacient($type="paciente"){
+  public function return_all_user_by_type_pacient($type="paciente",$type_medical="medico"){
 
     $this->db->select('*');
     $this->db->from('user');
-    $this->db->where('user_type',$type);
+    $this->db->where('user_type',$type_medical);
+    $this->db->or_where('user_type',$type);
 
     $query=$this->db->get();
 

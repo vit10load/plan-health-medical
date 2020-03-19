@@ -38,7 +38,7 @@ if(!$this->session->has_userdata('user_id')) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,6 +95,10 @@ if(!$this->session->has_userdata('user_id')) {
                   <td>User Mobile</td>
                   <td><?php echo  $val['user_mobile']; /*$this->session->userdata('user_mobile');*/ ?></td>
                 </tr>
+                <tr>
+                  <td>User Type</td>
+                  <td><?php echo  $val['user_type']; /*$this->session->userdata('user_mobile');*/ ?></td>
+                </tr>
                 <tr> 
                   <td style="padding-top: 20px;">
                     <form action="<?php echo base_url('user/exclude_user'); ?>" method="POST">
@@ -136,6 +140,10 @@ if(!$this->session->has_userdata('user_id')) {
                 <tr>
                   <td>User Mobile</td>
                   <td><?php echo  $key->user_mobile; /*$this->session->userdata('user_mobile');*/ ?></td>
+                </tr>
+                <tr>
+                  <td>User Type</td>
+                  <td><?php echo  $key->user_type; /*$this->session->userdata('user_mobile');*/ ?></td>
                 </tr>
                 <tr> <td style="padding-top: 20px;"> </td></tr>
                 <?php 
@@ -190,6 +198,10 @@ if(!$this->session->has_userdata('user_id')) {
 
               <div class="form-group">
                 <input class="form-control" placeholder="Enter 10 diMobile No" name="user_mobile" type="number" value="<?php echo $key->user_mobile; ?>">
+              </div>
+
+              <div class="form-group">
+                <input class="form-control" placeholder="press paciente or medico or master" name="user_type" type="text" value="<?php echo $key->user_type; ?>">
               </div>
 
               <input class="btn btn-lg btn-success btn-block" type="submit" value="Update User" name="register" >
