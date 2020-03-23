@@ -6,7 +6,7 @@ if (!($this->session->has_userdata('user_id') and $this->session->has_userdata('
 
 }elseif ($this->session->userdata('user_type') === 'paciente') {
     
-    redirect('user/user_logout');
+    redirect('home');
 
 }
 

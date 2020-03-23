@@ -53,6 +53,7 @@ $route['default_controller'] = 'user/login_view';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['home'] = 'home/index';
 $route['plan'] = 'plan/index';
 $route['plan/create'] = 'plan/create';
 $route['query'] = 'query/index';

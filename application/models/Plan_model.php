@@ -21,19 +21,17 @@ class Plan_model extends CI_model {
 
   public function return_plans_health() {
 
-    $this->db->select('*');
-    $this->db->from('plano_saude');
+    $data = $this->db->query('SELECT * FROM plano_saude, plano_saude_has_user, user WHERE fk_plano_saude_id = id_plano AND user.user_id = fk_user_id');
 
-    if($query=$this->db->get())
-    {
-      return $query->result_array();
-    }
-    else{
+    if ($data->num_rows() > 0) {
+      
+      return $data->result();
+
+    }else {
 
       return false;
     }
-
-
+    
   }
 
   public function return_plan_by_name($name){
@@ -84,6 +82,12 @@ class Plan_model extends CI_model {
 
     return $this->db->update('plano_saude', $data);
 
+
+  }
+
+  public function bind_plan_health_by_user($data){
+
+    return $this->db->insert('plano_saude_has_user', $data);
 
   }
 

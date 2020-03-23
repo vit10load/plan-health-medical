@@ -1,0 +1,37 @@
+/*DESKTOP - CONTEUDO MEIO*/
+
+
+/*** TITULOS ****/
+
+h4 {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+/**** TITULOS ****/
+
+.dropdown {
+    display: block;
+    margin: auto;
+    margin-right: 0px !important;
+}
+
+.jumbotron {
+    padding: 2rem 2rem !important;
+}
+
+.text-muted {
+    text-decoration: none !important;
+    padding: 10px;
+}
+
+.text-muted:hover {
+    color: #fff !important;
+}
+
+.container {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}

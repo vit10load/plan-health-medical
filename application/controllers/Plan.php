@@ -10,6 +10,7 @@ class Plan extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('plan_model');
+		$this->load->model('user_model');
 		$this->load->library('session');
 
 	}
@@ -18,13 +19,14 @@ class Plan extends CI_Controller {
 
 		$this->data['plans'] = $this->plan_model->return_plans_health();
 
+		$this->data['user_for_query'] = $this->user_model->return_all_user_by_type_pacient();
+
 		$this->load->view("plan_profile",$this->data);
 		
 	}
 
 	public function create() {
 
-		//$data['plans'] = null;
 
 		$plan = array(
 			'acomodacao'=>$this->input->post('accomodation'),
@@ -97,6 +99,22 @@ class Plan extends CI_Controller {
 		if ($this->plan_model->exclude_plan_by_id($id_plan)) {
 			
 			redirect('plan');
+		}
+
+	}
+
+	public function bind_plan_by_user_id(){
+
+		$this->data['user_bind'] = array(
+			'fk_user_id' => $this->input->post('user_id'),
+			'fk_plano_saude_id' => $this->input->post('id_plan')
+		);
+
+		if ($this->security->xss_clean($this->data)) {
+			
+			$this->plan_model->bind_plan_health_by_user($this->data['user_bind']);
+
+			$this->index();
 		}
 
 	}
