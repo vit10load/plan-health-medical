@@ -34,6 +34,8 @@ class Testes extends CI_Controller
 	{
 		$this->test_if_exists_user_email();
 		$this->test_if_user_has_plan_health();
+		$this->test_session_user_exists();
+		$this->test_verify_if_exists_path_to_cache();
 	}
 
 
@@ -135,6 +137,38 @@ class Testes extends CI_Controller
 
 		}
 
+
+		echo $this->unit->run($test, $expected_result, $test_name);
+
+	}
+
+	private function test_session_user_exists(){
+
+		$test_name = '[SESSION_EXISTS FOR USER]: teste for user if exists session';
+		$test = null;
+		$expected_result = null;
+
+		if ($this->session->has_userdata('user_id')) {
+			
+			$test = true;
+			$expected_result = 'is_true';
+
+		}else {
+
+			$test = false;
+			$expected_result = 'is_true';
+		}
+
+		echo $this->unit->run($test, $expected_result, $test_name);
+	}
+
+	private function test_verify_if_exists_path_to_cache(){
+
+		$test_name = '[CHECK_IF_PATH_TO_CACHE]: teste path to cache';
+
+		$test = file_exists(getcwd().'\application'.'\cache');
+
+		$expected_result = 'is_true';
 
 		echo $this->unit->run($test, $expected_result, $test_name);
 

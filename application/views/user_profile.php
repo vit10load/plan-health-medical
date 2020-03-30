@@ -104,13 +104,13 @@ if(!$this->session->has_userdata('user_id')) {
                   <td><?php echo "R$".$val['value']; ?></td>
                 </tr>
                 <tr> 
-                  <td style="padding-top: 20px;">
+                  <td>
                     <form action="<?php echo base_url('user/exclude_user'); ?>" method="POST">
                       <input type="hidden" name="user_id" value="<?php echo $val['user_id']; ?>"/>
                       <button type="submit">excluir</button>
                     </form>
                   </td>
-                  <td style="padding-top: 20px;">
+                  <td>
                     <form action="<?php echo base_url('user/list_user'); ?>" method="POST">
                       <input type="hidden" name="user_id" value="<?php echo $val['user_id']; ?>"/>
                       <button type="submit">editar</button>
