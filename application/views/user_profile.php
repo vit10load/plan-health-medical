@@ -81,23 +81,27 @@ if(!$this->session->has_userdata('user_id')) {
                 ?>
                 <tr>
                   <td>User Name</td>
-                  <td><?php echo $val['user_name']; /*$this->session->userdata('user_name');*/ ?></td>
+                  <td><?php echo $val['user_name'];  ?></td>
                 </tr>
                 <tr>
                   <td>User Email</td>
-                  <td><?php echo $val['user_email']; /*$this->session->userdata('user_email');*/ ?></td>
+                  <td><?php echo $val['user_email'];  ?></td>
                 </tr>
                 <tr>
                   <td>User Age</td>
-                  <td><?php echo  $val['user_age']; /*$this->session->userdata('user_age');*/  ?></td>
+                  <td><?php echo  $val['user_age'];  ?></td>
                 </tr>
                 <tr>
                   <td>User Mobile</td>
-                  <td><?php echo  $val['user_mobile']; /*$this->session->userdata('user_mobile');*/ ?></td>
+                  <td><?php echo  $val['user_mobile'];  ?></td>
                 </tr>
                 <tr>
                   <td>User Type</td>
-                  <td><?php echo  $val['user_type']; /*$this->session->userdata('user_mobile');*/ ?></td>
+                  <td><?php echo  $val['user_type'];  ?></td>
+                </tr>
+                <tr>
+                  <td>Amount receivable for health plan and consultations, Day: <?php echo date("Y-m-d H:i:s"); ?></td>
+                  <td><?php echo "R$".$val['value']; ?></td>
                 </tr>
                 <tr> 
                   <td style="padding-top: 20px;">
@@ -127,23 +131,27 @@ if(!$this->session->has_userdata('user_id')) {
                 ?>
                 <tr>
                   <td>User Name</td>
-                  <td><?php echo $key->user_name; /*$this->session->userdata('user_name');*/ ?></td>
+                  <td><?php echo $key->user_name; ?></td>
                 </tr>
                 <tr>
                   <td>User Email</td>
-                  <td><?php echo $key->user_email; /*$this->session->userdata('user_email');*/ ?></td>
+                  <td><?php echo $key->user_email;  ?></td>
                 </tr>
                 <tr>
                   <td>User Age</td>
-                  <td><?php echo  $key->user_age; /*$this->session->userdata('user_age');*/  ?></td>
+                  <td><?php echo  $key->user_age;  ?></td>
                 </tr>
                 <tr>
                   <td>User Mobile</td>
-                  <td><?php echo  $key->user_mobile; /*$this->session->userdata('user_mobile');*/ ?></td>
+                  <td><?php echo  $key->user_mobile; ?></td>
                 </tr>
                 <tr>
                   <td>User Type</td>
-                  <td><?php echo  $key->user_type; /*$this->session->userdata('user_mobile');*/ ?></td>
+                  <td><?php echo  $key->user_type; ?></td>
+                </tr>
+                <tr>
+                  <td>Amount receivable for health plan and consultations, Day: <?php echo date("Y-m-d H:i:s"); ?></td>
+                  <td><?php echo $key->value; ?></td>
                 </tr>
                 <tr> <td style="padding-top: 20px;"> </td></tr>
                 <?php 
