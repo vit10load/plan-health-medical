@@ -31,7 +31,7 @@ class User extends CI_Controller {
 		
 		$email_check=$this->user_model->email_check($user['user_email']);
 
-		if($email_check){
+		if(!$email_check){
 			$this->user_model->register_user($user);
 			$this->session->set_flashdata('success_msg', 'Registered successfully.Now login to your account.');
 			redirect('user/login_view');

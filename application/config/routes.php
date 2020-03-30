@@ -58,4 +58,5 @@ $route['plan'] = 'plan/index';
 $route['plan/create'] = 'plan/create';
 $route['query'] = 'query/index';
 $route['query/update'] = 'query/update';
+$route['utest'] = 'utest/testes';
 

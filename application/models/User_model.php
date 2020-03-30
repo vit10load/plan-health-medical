@@ -48,11 +48,11 @@ class User_model extends CI_model {
 
     if($query->num_rows() > 0){
 
-      return false;
+      return true;
 
     }else{
 
-      return true;
+      return false;
 
     }
 
