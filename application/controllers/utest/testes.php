@@ -14,7 +14,7 @@ class Testes extends CI_Controller
 	/**
 	 * Connstrutor da classe
 	 */
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library('unit_test');
